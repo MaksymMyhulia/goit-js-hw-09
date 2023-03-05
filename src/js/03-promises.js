@@ -33,5 +33,4 @@ function onCreatePromises(event) {
      window.alert(`❌ Rejected promise ${position} in ${delay}ms`);
     });
    }
-   event.currentTarget.reset();
 }
