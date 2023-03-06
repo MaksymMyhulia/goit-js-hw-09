@@ -24,27 +24,29 @@ const options = {
     defaultDate: new Date(),
     minuteIncrement: 1,
     onClose(selectedDates) {
-      chooseDay(selectedDates)
+      chooseDate(selectedDates)
     },
   };
 
   flatpickr(input , options);
 
-function chooseDay (selectedDates)  {
-  currentDate = new Date().getTime;
+function chooseDate (selectedDates)  {
+  currentDate = new Date().getTime();
   selectedDate = selectedDates[0].getTime();
   
-  if (currentDate > selectedDate) {
-    button.disabled = true;
-    Report.failure(
-      'Please choose a date in the future',
-      '"Failure is simply the opportunity to begin again, this time more intelligently." <br/><br/>- Henry Ford',
-      'Okay',
-      );
-    //window.alert("Please choose a date in the future");
-    return;
-} else {
+  if (selectedDate > currentDate) {
     button.disabled = false;
+    Report.success(
+      'Click on start!',
+      '"Do not try to become a person of success but try to become a person of value." <br/><br/>- Albert Einstein',
+      'Okay',
+     );
+} else {
+  Report.failure(
+       'Please choose a date in the future',
+       '"Failure is simply the opportunity to begin again, this time more intelligently." <br/><br/>- Henry Ford',
+       'Okay',
+       );
 }
 }
 
@@ -59,7 +61,7 @@ function timerStart() {
       'Timer stopped!',
       '"Do not try to become a person of success but try to become a person of value." <br/><br/>- Albert Einstein',
       'Okay',
-      );
+     );
       //window.alert("Timer stopped!")
     } else {
       button.disabled = true;
