@@ -1,5 +1,6 @@
 import flatpickr from "flatpickr";
 import "flatpickr/dist/flatpickr.min.css";
+import { Report } from 'notiflix/build/notiflix-report-aio';
 
 const input = document.querySelector('#datetime-picker');
 const button = document.querySelector('button[data-start]');
@@ -11,7 +12,6 @@ const DELAY = 1000;
 let intervalId = null;
 let currentDate = null;
 let selectedDate = null;
-
 
 button.disabled = true;
 button.addEventListener('click', timerStart);
@@ -31,11 +31,17 @@ const options = {
   flatpickr(input , options);
 
 function chooseDay (selectedDates)  {
-  currentDate = new Date ().getTime;
+  currentDate = new Date().getTime;
   selectedDate = selectedDates[0].getTime();
   
   if (currentDate > selectedDate) {
-    window.alert("Please choose a date in the future");
+    button.disabled = true;
+    Report.failure(
+      'Please choose a date in the future',
+      '"Failure is simply the opportunity to begin again, this time more intelligently." <br/><br/>- Henry Ford',
+      'Okay',
+      );
+    //window.alert("Please choose a date in the future");
     return;
 } else {
     button.disabled = false;
@@ -49,7 +55,12 @@ function timerStart() {
       clearInterval(intervalId);
       button.disabled = true;
       input.disabled = false;
-      window.alert("Timer stopped!")
+      Report.success(
+      'Timer stopped!',
+      '"Do not try to become a person of success but try to become a person of value." <br/><br/>- Albert Einstein',
+      'Okay',
+      );
+      //window.alert("Timer stopped!")
     } else {
       button.disabled = true;
       input.disabled = false;
@@ -91,5 +102,4 @@ function convertMs(ms) {
 
     return { days, hours, minutes, seconds };
   }
-
 
